@@ -34,7 +34,7 @@ public class Product {
     public void selectQtyOfProduct(String qty) throws Exception {
         WebElement productInfo=SeleniumMethods.getElementInShadowDom(driver, driver.findElement(productDetailPage), productDetail);
         WebElement prodInfoSection=SeleniumMethods.getElementInShadowDom(driver, productInfo, prodDetailSection);
-        WebElement pickers=prodInfoSection.findElement(By.cssSelector("div[class='pickers']"));
+        WebElement pickers=prodInfoSection.findElement(pickersSection);
         WebElement productQty=pickers.findElement(qtyOfProduct);
         SeleniumMethods.setOptionByText(driver, productQty, qty);
     }
@@ -86,5 +86,6 @@ public class Product {
     private By qtyOfProduct=By.id("quantitySelect");
     private By sizeOfProduct=By.id("sizeSelect");
 
+    private By pickersSection=By.cssSelector("div[class='pickers']");
     private By viewCartBtn=By.cssSelector("shop-button[class='modal-button']");
 }

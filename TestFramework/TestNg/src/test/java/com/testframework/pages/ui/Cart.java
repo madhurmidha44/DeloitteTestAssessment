@@ -44,7 +44,7 @@ public class Cart {
         WebElement prodList=SeleniumMethods.getElementInShadowDom(driver, shopCartSection, productList);
         WebElement shopCartItem=prodList.findElements(shopCartItemList).get(productNumber);
         WebElement prodDetailsSection=SeleniumMethods.getElementInShadowDom(driver, shopCartItem, detailsSection);
-        WebElement priceOfProduct=prodDetailsSection.findElement(By.cssSelector("div[class='price']"));
+        WebElement priceOfProduct=prodDetailsSection.findElement(price);
         return priceOfProduct.getText();
     }
 
@@ -79,5 +79,6 @@ public class Cart {
     private By priceInCart=By.cssSelector("span[class='subtotal']");
     private By removeProduct=By.cssSelector("paper-icon-button[class='delete-button']");
 
+    private By price=By.cssSelector("div[class='price']");
     private By checkoutBtn=By.tagName("shop-button");
 }

@@ -20,15 +20,15 @@ public class Checkout {
     public String getProductDescriptionCheckoutPage(int productNumber) throws Exception {
         WebElement shopCheckoutSection=SeleniumMethods.getElementInShadowDom(driver, driver.findElement(checkoutPage), shopCheckout);
         WebElement formPostSection=SeleniumMethods.getElementInShadowDom(driver, shopCheckoutSection, formPost);
-        WebElement orderList=formPostSection.findElements(By.cssSelector("div[class='row order-summary-row']")).get(productNumber);
-        WebElement prodDescription=orderList.findElement(By.cssSelector("div[class='flex']"));
+        WebElement orderList=formPostSection.findElements(orderListEle).get(productNumber);
+        WebElement prodDescription=orderList.findElement(ProductDescription);
         return prodDescription.getText();
     }
 
     public float getProductPriceCheckoutPage(int productNumber) throws Exception {
         WebElement shopCheckoutSection=SeleniumMethods.getElementInShadowDom(driver, driver.findElement(checkoutPage), shopCheckout);
         WebElement formPostSection=SeleniumMethods.getElementInShadowDom(driver, shopCheckoutSection, formPost);
-        WebElement orderList=formPostSection.findElements(By.cssSelector("div[class='row order-summary-row']")).get(productNumber);
+        WebElement orderList=formPostSection.findElements(orderListEle).get(productNumber);
         WebElement prodPrice=orderList.findElements(By.tagName("div")).get(1);
         String priceString= prodPrice.getText().substring(1);
         return Float.parseFloat(priceString);
@@ -37,7 +37,7 @@ public class Checkout {
     public float getTotalPriceCheckoutPage() throws Exception {
         WebElement shopCheckoutSection=SeleniumMethods.getElementInShadowDom(driver, driver.findElement(checkoutPage), shopCheckout);
         WebElement formPostSection=SeleniumMethods.getElementInShadowDom(driver, shopCheckoutSection, formPost);
-        WebElement totalPriceRow=formPostSection.findElement(By.cssSelector("div[class='row total-row']"));
+        WebElement totalPriceRow=formPostSection.findElement(totalpriceRowProd);
         WebElement prodPrice=totalPriceRow.findElements(By.tagName("div")).get(1);
         String priceString= prodPrice.getText().substring(1);
         return Float.parseFloat(priceString);
@@ -45,6 +45,13 @@ public class Checkout {
 
     private By checkoutPage=By.cssSelector("shop-app[page='checkout']");
     private By shopCheckout=By.cssSelector("shop-checkout[name='checkout']");
+
     private By productList=By.cssSelector("div[class='list']");
+
+    private By totalpriceRowProd=By.cssSelector("div[class='row total-row']");
+
+    private By orderListEle=By.cssSelector("div[class='row order-summary-row']");
+
+    private By ProductDescription=By.cssSelector("div[class='flex']");
     private By formPost=By.cssSelector("form[method='post']");
 }
